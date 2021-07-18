@@ -1,0 +1,40 @@
+{% extends "news/base.html" %}
+
+
+{% block content %}
+<main>
+
+  <section>
+    <div class='bg-bg-img'></div>
+<!-- <img src="camille.jpg" alt="the pump bottle wtith tulips and towel"> -->
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for one in news %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <h5 class="card-title">{{one.title}}</h5>
+            <a href="{% url 'detail' pk=one.id %}"><img class="card-img-top" src="{{one.image.url}}" alt="" style="width: 360px; height: 250px;"/></a>
+            <div class="card-body">
+              <p class="card-text">{{one.text_min}}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}
+
+
+
+
+      
+  

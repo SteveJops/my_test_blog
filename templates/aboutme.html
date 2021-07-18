@@ -1,0 +1,33 @@
+{% extends 'single/base.html' %}
+
+{% block content %}
+<main class="container">  
+    <div class="row g-5">
+      <div class="col-md-8">  
+        <article class="blog-post">
+          <h2 class="blog-post-title">About Me</h2>
+          <p class="blog-post-meta">18.07.2021 <br>Author: Steve JOps </p>
+
+          <section>
+            <img class="pt-1 pb-2" src="/media/grooth.jpg" alt="{{one.title}}" width="600" height="400"/>
+        <!-- <img src="camille.jpg" alt="the pump bottle wtith tulips and towel"> -->
+          </section>
+  
+          <p>My name is Grooth. And Am a big tree. So you just have to water me and save me from insects</p>
+          <hr>
+          <p>Why do we use it?
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </article>
+      </div>
+      <!-- <div class="col-md-4">
+        <div class="position-sticky" style="top: 2rem;">
+          <div class="p-4 mb-3 bg-light rounded">
+            <h4 class="fst-italic">About</h4>
+            <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </main>
+
+  {% endblock %}

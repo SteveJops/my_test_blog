@@ -158,3 +158,6 @@ __pycache__
 secrets.py
 db_data.py
 secrets_key.py
+.vscode
+vscode
+settings.json
