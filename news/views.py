@@ -1,8 +1,9 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView, View, DetailView
 from .models import News
 from django.db.models import Q
+from .forms import NewsForm
 
 # Create your views here.
 
@@ -34,7 +35,7 @@ class AboutTemplate(TemplateView):
 class SingleDetail(DetailView):
     model = News
     context_object_name = 'one'
-    slug_field = "id"
+    slug_field = "slug"
     template_name = "single/single_detail.html"
 
 # class SearchView(ListView):
@@ -49,6 +50,20 @@ class SingleDetail(DetailView):
 #         context = News.objects.filter(title__icontains=query) 
 #         print(context)
 #         return context
+
+
+class  NewsCreate(View):
+    def get(self, request):
+        form = NewsForm()
+        print(form)
+        return render(request, 'news/news_create.html', {'form': form})
+
+    def post(self, request):
+        bound_form = NewsForm(request.POST)
+        if bound_form.is_valid():
+            new_news = bound_form.save()
+            return redirect(new_news)
+        return render(request, 'news/news_create.html',  {'form': bound_form})
 
 
 
