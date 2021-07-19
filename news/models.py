@@ -4,8 +4,6 @@ from django.urls import reverse
 from django.utils.text import slugify
 from time import time
 
-from django.utils import timezone
-
 User = get_user_model()
 
 def gen_slug(s):

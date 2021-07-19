@@ -1,0 +1,12 @@
+{% extends "news/base.html" %}
+
+{% block content %}
+<div class="album py-5 bg-light">
+    <div class="container">
+<p>Logged out!</p>
+
+<a href="{% url 'login'%}">Click here to login again.</a>
+
+    </div>
+</div>
+{% endblock %}

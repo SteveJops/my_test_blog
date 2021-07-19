@@ -5,8 +5,8 @@ from django.utils import timezone
 from .models import News
 from django.db.models import Q
 from .forms import NewsForm
-
-# Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import UserRegistrationForm
 
 class NewsList(ListView):
     """ List of articles"""
@@ -20,17 +20,13 @@ class NewsList(ListView):
             post = News.objects.filter(Q(title__icontains=search_query)| Q(text_min__icontains=search_query))
         else:
            post = News.objects.all()
-
         return post
-
-class AboutTemplate(TemplateView):
-    template_name = 'aboutme.html'
 
 class SingleDetail(DetailView):
     model = News
     context_object_name = 'one'
     slug_field = "slug"
-    template_name = "single/single_detail.html"
+    # template_name = "single/single_detail.html"
 
 
 
@@ -48,7 +44,8 @@ class SingleDetail(DetailView):
 #         return context
 
 # toDO delete method to user
-class  NewsCreate(View):
+class  NewsCreate(LoginRequiredMixin, View):
+    raise_exception = True
     def get(self, request):
         form = NewsForm()
         return render(request, 'news/news_create.html', {'form': form})
@@ -64,7 +61,8 @@ class  NewsCreate(View):
         return render(request, 'news/news_create.html',  {'form': bound_form})
 
 
-class NewsUpdate(View):
+class NewsUpdate(LoginRequiredMixin, View):
+    raise_exception = True
     def get(self, request, slug):
         news_update = News.objects.get(slug__iexact=slug)
         bound_form = NewsForm(instance=news_update)
@@ -78,6 +76,28 @@ class NewsUpdate(View):
             new_news_update = bound_form.save()
             return redirect(new_news_update)
         return render(request, 'news/news_update.html', {'form': bound_form, 'news': news_update})
+
+
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.is_staff = True
+            # Save the User object
+            new_user.save()
+            return render(request, 'registration/register_done.html', {'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'registration/register.html', {'user_form': user_form})
+
+
+class AboutTemplate(TemplateView):
+   template_name= 'aboutme.html'
 
 
 

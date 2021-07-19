@@ -17,11 +17,9 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
-from news.views import AboutTemplate
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
-    path('about/', AboutTemplate.as_view(), name='about')
+    path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
