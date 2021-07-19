@@ -23,6 +23,5 @@ from news.views import AboutTemplate
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
-    path('aboutme/', AboutTemplate.as_view(), name='aboutme')
-
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    path('about/', AboutTemplate.as_view(), name='about')
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,4 +1,6 @@
 {% extends 'single/base.html' %}
+{% load static %}
+
 
 {% block content %}
 
@@ -6,7 +8,12 @@
     <div class="row g-5">
       <div class="col-md-8">
         <section>
-          <img class="pt-5 pb-2" src="{{one.image.url}}" alt="{{one.title}}" width="600" height="400"/>
+          {% if one.image %}
+              <img class="pt-5 pb-2" src="{{one.image.url}}" alt="{{one.title}}" width="600" height="400"/>
+         {% else %}
+              <img src="{% static 'media/symbol.jpg' %}" alt="question symbol" width="600" height="400">
+         {% endif %}
+          
       <!-- <img src="camille.jpg" alt="the pump bottle wtith tulips and towel"> -->
         </section>
         <article class="blog-post">

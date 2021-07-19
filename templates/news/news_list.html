@@ -1,4 +1,7 @@
 {% extends "news/base.html" %}
+{% load static %}
+
+
 
 
 {% block content %}
@@ -18,7 +21,14 @@
         <div class="col">
           <div class="card shadow-sm">
             <h5 class="card-title">{{one.title}}</h5>
-            <a href="{% url 'detail' one.slug %}"><img class="card-img-top" src="{{one.image.url}}" alt="" style="width: 360px; height: 250px;"/></a>
+            
+            <a href="{% url 'detail' one.slug %}">
+          {% if one.image %}
+              <img class="card-img-top" src="{{one.image.url}}" alt="" style="width: 360px; height: 250px;"/>
+          {% else %}
+              <img src="{% static 'media/symbol.jpg' %}" style="width: 360px; height: 250px;">
+          {% endif %}
+        </a>
             <div class="card-body">
               <p class="card-text">{{one.text_min}}</p>
             </div>

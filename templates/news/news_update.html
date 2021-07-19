@@ -2,11 +2,11 @@
 
 
 {% block content %}
+
 <div class="album py-5 bg-light">
     <div class="container">
-
-<h1>Create Article :</h1>
-<form class='mt-4' action="{% url 'creates' %}" method="post" enctype="multipart/form-data">
+<h1>Update Article :</h1>
+<form class='mt-4' action="{{news.get_update_url}}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
         {% for field in form %}
     <div class="form-group">
@@ -15,12 +15,13 @@
                 {{field.errors}}
             </div>
         {% endif %}
-        {{field.label}}
+        {{field.label}}        
         {{field}}
+
     </div>
     {% endfor %}
 
-    <button type="submit" name="button" class="btn btn-primary pt-2">Create post</button>
+    <button type="submit" name="button" class="btn btn-primary mb-2">Update post</button>
 </form>
 </div></div>
 
